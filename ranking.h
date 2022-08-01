@@ -1,15 +1,17 @@
-#ifndef RANKING_H
-#define RANKING_H
+#ifndef Ranking_H
+#define Ranking_H
 
 #include <QObject>
+#include <QDebug>
+#include <QTextStream>
 #include <QList>
 #include <QFile>
 
-class ranking : public QObject
+class Ranking : public QObject
 {
   Q_OBJECT
 public:
-  explicit ranking(QObject *parent = nullptr);
+  explicit Ranking(QObject *parent = nullptr);
 
   bool openRank();
   void saveRank();
@@ -31,8 +33,8 @@ private:
 
   QList <rank_row> rank_db;
 
-  bool parser();
+  bool parser(QString line);
 
 };
 
-#endif // RANKING_H
+#endif // Ranking_H
