@@ -28,6 +28,8 @@ public:
 
   void levelManager(int gameover, int gameend, int difficult);  //0 - easy, 1- normal, 2 - hard
 
+  Ranking GameRanking;
+
 signals:
   void changePosition();  //change position of clicker, depends on correct click or time interval
   void levelUpdate();     //simple signal when change lvl. It shows on level info (QML) value of level

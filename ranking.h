@@ -14,6 +14,7 @@ public:
   explicit Ranking(QObject *parent = nullptr);
 
   bool openRank();
+  void closeRank();
   void saveRank();
   void addPlayer(QString nickname, int score, int time);
 

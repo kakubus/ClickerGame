@@ -19,11 +19,15 @@ ClickerGame::ClickerGame(QObject *parent)
   pts_gameend = 400;
   difficulty = 1;
   nickname = "Player";
+
+  GameRanking.openRank();
+
 }
 
 ClickerGame::~ClickerGame()
 {
   timer->stop();
+  GameRanking.closeRank();
 }
 
 void ClickerGame::levelManager(int gameover, int gameend, int difficult)
