@@ -21,7 +21,6 @@ ClickerGame::ClickerGame(QObject *parent)
   nickname = "Player";
 
   GameRanking.openRank();
-
 }
 
 ClickerGame::~ClickerGame()
@@ -46,12 +45,12 @@ void ClickerGame::levelManager(int gameover, int gameend, int difficult)
     time_interval = difficult/1.2;
     emit levelUpdate();
   }
-
   if(score >= gameend){
       timer -> stop();
       dialog_header = "Win!"; //header text
       text_dialog = "Excellent game! \nYour points: " + QString::number(gameend)+ "\nTime: " + getTimeGame()+"s";
-
+      GameRanking.addPlayer(nickname, score, getTimeGame());
+      GameRanking.saveRank();
       emit showDialog();
     }
   if(score <= gameover)
@@ -59,7 +58,8 @@ void ClickerGame::levelManager(int gameover, int gameend, int difficult)
     timer -> stop();
     dialog_header = "Game over!"; //header text
     text_dialog = "You was too slow! \nYour points: " + QString::number(gameover) + "\nTime: " + getTimeGame()+"s";
-
+    GameRanking.addPlayer(nickname, score, getTimeGame());
+    GameRanking.saveRank();
     emit showDialog();
   }
 }
@@ -84,7 +84,6 @@ void ClickerGame::setNewCoordinates(bool isClicked)
     {
      // text_dialog = "Ops..";
       qDebug() << text_dialog;
-
       score -= 10;
       emit shortInfo();
     }
@@ -92,12 +91,8 @@ void ClickerGame::setNewCoordinates(bool isClicked)
         text_dialog = "Yeah! Hit!";
         counter = 0;
     }
-
     qDebug()<<"Time has come.. " << counter << " | " << clicker_position.x << " " << clicker_position.y;
-
-
     levelManager(pts_gameover, pts_gameend, difficulty); //Game stop at -50 points, end at 400 points and level of game is "Normal" (1)
-
     emit changePosition();
   }
   else{
@@ -108,27 +103,22 @@ void ClickerGame::setNewCoordinates(bool isClicked)
     {
       primitive_time++;
       counter_time = 0;
-       text_dialog = "Hit icon";
-           emit shortInfo();
+      text_dialog = "Hit icon";
+      emit shortInfo();
       emit updateTime();
       emit updateScore();
     }
   counter_time++;
  // text_dialog = "Hit icon";
       emit shortInfo();
-
-
 }
 
 void ClickerGame::setNickname(QString nick)
 {
   if(nick == ""| nick == " ") //temp || to do - regular exp.
-  {
     nickname = "Player";
-  }
-  else{
+  else
     nickname = nick;
-  }
 
   qDebug()<< "Received nickname: " + nickname;
 }
@@ -144,7 +134,6 @@ void ClickerGame::clicked()
 {
   this->score += 10;
   setNewCoordinates(true);
-  //emit updateScore();
 }
 
 int ClickerGame::getXPosition()

@@ -24,14 +24,10 @@ bool Ranking::openRank()
   while(!in.atEnd())
     {
       QString line = in.readLine();
-
       if(parser(line) != true)
-        {
           qDebug() << "Error while parsing file!";
-        }
-      else{
+      else
           qDebug() << "Parsed (OK) and add to Ranking row";
-        }
     }
   return true;
 }
@@ -75,7 +71,7 @@ QString Ranking::showRank()
 
 bool Ranking::parser(QString line)
 {
-  //line pattern: Nickname,Score,Time;
+  //line pattern: Nickname,Score,Time
   if(line.isEmpty() || line.isNull())
     {
       qDebug() << "Parser Error: Empty/Null line";
@@ -93,13 +89,6 @@ bool Ranking::parser(QString line)
       rank_db.append(temp_row);
       qDebug()<< "1: " << temp_row.nickname<< "2: " << temp_row.score <<"3: " << temp_row.time;
 
-//      for(int i = 0; i<temp.size(); i++)
-//        {
-
-
-//        }
-        return true; //recognized
+      return true; //recognized
     }
-
-
 }
