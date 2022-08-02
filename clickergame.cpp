@@ -182,9 +182,16 @@ QString ClickerGame::getLevel()
   return "Level "+QString::number(level);
 }
 
+QString ClickerGame::showRanking()
+{
+  return GameRanking.showRank();
+}
+
 void ClickerGame::stopGame()
 {
   timer->stop();
+  GameRanking.addPlayer(nickname, score, getTimeGame());
+  GameRanking.saveRank();
  // delete ClickerGame;
 }
 

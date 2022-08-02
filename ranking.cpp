@@ -12,7 +12,7 @@ Ranking::Ranking(QObject *parent)
 bool Ranking::openRank()
 {
   file = new QFile(filepath);
-  if(!file->open(QIODevice::Append | QIODevice::Text))
+  if(!file->open(QIODevice::ReadWrite | QIODevice::Text))
     {
       qDebug() << "ERROR: " + file->errorString();
       return false;
@@ -40,6 +40,37 @@ void Ranking::closeRank()
 {
   qDebug() << "File closed";
   file->close();
+}
+
+void Ranking::saveRank()
+{
+  file->flush();
+}
+
+void Ranking::addPlayer(QString nickname, int score, QString time)
+{
+  QTextStream out(file);
+  out << nickname << "," << QString::number(score) <<"," << time <<"\n";
+}
+
+QString Ranking::showRank()
+{
+  QString temp = "<table style='width: 100%'>"
+                 "<tr>"
+                 "<th style = 'padding: 5px'>Player name</th>"
+                 "<th style = 'padding: 5px'>Score</th>"
+                 "<th style = 'padding: 5px'>Time [s]</th>"
+                 "</tr>";
+  for(int i = 0; i < rank_db.size(); i++)
+    {
+      temp.append("<tr>"
+                  "<td style = 'padding: 5px'>"+ rank_db[i].nickname +"</td>"
+                  "<td style = 'padding: 5px'>"+ QString::number(rank_db[i].score) +"</td>"
+                  "<td style = 'padding: 5px'>"+ QString::number(rank_db[i].time) +"</td>"
+                  "</tr>");
+    }
+  temp.append("</table>");
+  return temp;
 }
 
 bool Ranking::parser(QString line)

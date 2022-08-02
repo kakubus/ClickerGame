@@ -52,6 +52,7 @@ public slots:
   QString getDialogHeader();
   QString getDialogText();
   QString getLevel();
+  QString showRanking();
 
 //  bool getMouseCoordinates(); //unused
 //  void setTimeInterval(int time); //setting other time interval. Default = 5s

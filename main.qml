@@ -75,6 +75,22 @@ ApplicationWindow {
 
                 }
             }
+            ToolButton { //temp - to do scroll and Quit.dialog not Qt.quit()
+                text: qsTr("Game Ranking")
+                icon.name: "document-open"
+                onClicked: {
+                    dialog.open();
+                    dialog.width = 600;
+                    dialog.height = 600;
+
+                    textscoreinfo.font.pixelSize = 14;
+                    textscoreinfo.textFormat = Text.RichText;
+                    textheader.text = "Game ranking";
+                    textscoreinfo.text = CGEngine.showRanking();
+
+
+                }
+            }
             ToolButton {
                 text: qsTr("Quit")
                 icon.name: "document-open"
@@ -82,10 +98,7 @@ ApplicationWindow {
                     dialog.open();
                     textscoreinfo.text = qsTr("Your score:\t")+CGEngine.getScoreGame() +"points\n"+ qsTr("Play time:\t")+CGEngine.getTimeGame()+qsTr("s");
                     CGEngine.stopGame();
-                    //Tymczasowo
-                 //   CGEngine.timer = stop();
 
-                  //  Qt.quit();
                 }
             }
         }

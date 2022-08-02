@@ -15,8 +15,10 @@ public:
 
   bool openRank();
   void closeRank();
-  void saveRank();
-  void addPlayer(QString nickname, int score, int time);
+ // void writeRank(QString nickname, int score, int time);
+  void saveRank();  //flush to file
+  void addPlayer(QString nickname, int score, QString time);  //write 1 row to ranking (when player stops/win/lose game)
+  QString showRank();
 
 signals:
 
