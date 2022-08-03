@@ -102,7 +102,9 @@ ApplicationWindow {
                 icon.name: "document-open"
                 onClicked: {
                     dialog.open();
-                    textscoreinfo.text = qsTr("Your score:\t")+CGEngine.getScoreGame() +"points\n"+ qsTr("Play time:\t")+CGEngine.getTimeGame()+qsTr("s");
+                    dialog.width = 300;
+                    dialog.height = 250;
+                    textscoreinfo.text = "Your score:\t" +CGEngine.getScoreGame() + " points \n"+ "\nPlay time:\t" + CGEngine.getTimeGame()+ " s";
                     CGEngine.stopGame();
 
                 }
@@ -334,12 +336,18 @@ ApplicationWindow {
             }
 
         }
-
-        Text{
-            id: textscoreinfo
-            font.pixelSize: 20
-            text: qsTr("Your score: ")+CGEngine.getScoreGame();
+        ScrollView{
+            anchors.fill: parent
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            clip: true
+            Text{
+                id: textscoreinfo
+                font.pixelSize: 20
+                text: qsTr("Your score: ")+CGEngine.getScoreGame();
+            }
         }
+
+
 
 
     }
