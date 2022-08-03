@@ -33,7 +33,6 @@ ApplicationWindow {
         function onUpdateScore()
         {
             textscore.text = qsTr("Score:\t")+CGEngine.getScoreGame();
-
         }
 
         function onTimeProgressUpdate(){
@@ -47,7 +46,6 @@ ApplicationWindow {
             textheader.text = CGEngine.getDialogHeader();
             textscoreinfo.text = CGEngine.getDialogText();
             texthint.visible = false;
-
         }
 
         function onLevelUpdate()

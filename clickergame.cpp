@@ -72,8 +72,8 @@ void ClickerGame::setNewCoordinates(bool isClicked)
   if((counter ==round(time_interval*10)) || (isClicked == true)) //counter is increased every 1s
   {
     counter = 0;
-    this->clicker_position.x = rand() % (800-50) + 0;
-    this->clicker_position.y = rand() % (600-50) + 0;
+   clicker_position.x = rand() % (800-50) + 0;
+   clicker_position.y = rand() % (600-50) + 0;
 
     qDebug() << text_dialog;
 
@@ -116,7 +116,6 @@ void ClickerGame::setNewCoordinates(bool isClicked)
  // text_dialog = "Hit icon";
   emit timeProgressUpdate();
   emit shortInfo();
-
 }
 
 void ClickerGame::setNickname(QString nick)
@@ -133,12 +132,7 @@ void ClickerGame::timeGameScheduler()
 {
   connect(timer, SIGNAL(timeout()), this, SLOT(setNewCoordinates()));
   timer->start(100); //master timer (100ms)
-
-
-
-
   emit changePosition();
-
 }
 
 void ClickerGame::clicked()
@@ -202,7 +196,6 @@ void ClickerGame::stopGame()
   timer->stop();
   GameRanking.addPlayer(nickname, score, getTimeGame());
   GameRanking.saveRank();
- // delete ClickerGame;
 }
 
 
