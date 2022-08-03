@@ -21,6 +21,7 @@ public:
   } clicker_position;
 
   int primitive_time;
+  int remaining_time;
 
   QTimer *timer;
   QString dialog_header; //header text
@@ -31,12 +32,13 @@ public:
   Ranking GameRanking;
 
 signals:
-  void changePosition();  //change position of clicker, depends on correct click or time interval
-  void levelUpdate();     //simple signal when change lvl. It shows on level info (QML) value of level
+  void changePosition();      //change position of clicker, depends on correct click or time interval
+  void levelUpdate();         //simple signal when change lvl. It shows on level info (QML) value of level
   void updateScore();
   void updateTime();
-  void showDialog();      //open dialog for information for eg. Game over
-  void shortInfo();       //short text information for player for eg. You reached new lvl!
+  void showDialog();          //open dialog for information for eg. Game over
+  void shortInfo();           //short text information for player for eg. You reached new lvl!
+  void timeProgressUpdate();  //used for update progressBar
 
 public slots:
   void setNewCoordinates(bool isClicked = false); // random set coordinates clicker. isClicked means that Clicker was clicked or not. If not, generate new position and get -10 to score, if clicked only get new position
@@ -46,6 +48,9 @@ public slots:
 
   int getXPosition();
   int getYPosition();
+
+  int getTimeInterval();
+  int getRemainingTime();
 
   QString getTimeGame();
   QString getScoreGame();

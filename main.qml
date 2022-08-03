@@ -27,12 +27,18 @@ ApplicationWindow {
             masterclick.visible = true
             startButton.enabled = false
             texttime.text = qsTr("Time:\t")+CGEngine.getTimeGame()+qsTr("s");
+           // timeprogress.value =
         }
 
         function onUpdateScore()
         {
             textscore.text = qsTr("Score:\t")+CGEngine.getScoreGame();
 
+        }
+
+        function onTimeProgressUpdate(){
+            timeprogress.to = CGEngine.getTimeInterval();
+            timeprogress.value = CGEngine.getRemainingTime();
         }
 
         function onShowDialog()
@@ -169,6 +175,17 @@ ApplicationWindow {
                                 }
                             }
                         }
+
+                        ProgressBar{
+                            id: timeprogress
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width - 2
+                            anchors.top: parent.bottom
+                            from: 0
+                            to: 100
+                            value: 0
+                        }
+
                     }
                 }
 

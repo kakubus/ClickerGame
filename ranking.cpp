@@ -47,6 +47,8 @@ void Ranking::addPlayer(QString nickname, int score, QString time)
 {
   QTextStream out(file);
   out << nickname << "," << QString::number(score) <<"," << time <<"\n";
+//  rank_row temp_row = {nickname, score,  time.toInt()}; - temp. disabled
+//  rank_db.append(temp_row);
 }
 
 QString Ranking::showRank()

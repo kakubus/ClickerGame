@@ -109,8 +109,14 @@ void ClickerGame::setNewCoordinates(bool isClicked)
       emit updateScore();
     }
   counter_time++;
+
+  remaining_time = time_interval*10 - counter;
+//  qDebug()<<"R: " << remaining_time;
+
  // text_dialog = "Hit icon";
-      emit shortInfo();
+  emit timeProgressUpdate();
+  emit shortInfo();
+
 }
 
 void ClickerGame::setNickname(QString nick)
@@ -127,7 +133,12 @@ void ClickerGame::timeGameScheduler()
 {
   connect(timer, SIGNAL(timeout()), this, SLOT(setNewCoordinates()));
   timer->start(100); //master timer (100ms)
+
+
+
+
   emit changePosition();
+
 }
 
 void ClickerGame::clicked()
@@ -144,6 +155,16 @@ int ClickerGame::getXPosition()
 int ClickerGame::getYPosition()
 {
   return clicker_position.y;
+}
+
+int ClickerGame::getTimeInterval()
+{
+  return time_interval*10;
+}
+
+int ClickerGame::getRemainingTime()
+{
+  return remaining_time;
 }
 
 QString ClickerGame::getTimeGame()
