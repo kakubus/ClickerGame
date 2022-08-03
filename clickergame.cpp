@@ -29,7 +29,7 @@ ClickerGame::~ClickerGame()
   GameRanking.closeRank();
 }
 
-void ClickerGame::levelManager(int gameover, int gameend, int difficult)
+void ClickerGame::levelManager(int gameover, int gameend, int difficult) //to do - stop game when score is decreased 50 points. (when ~5s user not hit icon)
 {
   if(score > 100)
   {
